@@ -62,15 +62,22 @@ furls  <- html_nodes(x = url, css = selector_name) %>% html_nodes("h3")  %>% htm
 #                              , MovieURL = furls)
 
 for(i in 1:length(fnames)){
+  print(i)
   outMovie <- fetch_MoviePage_itunes(furls[i], fnames[i])
   if(i==1){outMovies = outMovie}else{outMovies = rbind(outMovies, outMovie)}
 }
 
 View(outMovies)
 
+write.csv(outMovies, file='~/Dropbox/ilab2/Project_Searching/surveyWebsite/iturnsTop100Jan2018.csv')
+
+write.csv(outMovies, file='~/Dropbox/ilab2/Project_Searching/surveyWebsite/iturnsTop100Sep2017.csv')
+
 write.csv(outMovies, file='~/Dropbox/ilab2/Project_Searching/surveyWebsite/iturnsTop100.csv')
 
-outMoviesiTunes   <- data.table(read.csv(file='~/Dropbox/ilab2/Project_Searching/surveyWebsite/iturnsTop100.csv'))
+outMoviesiTunes1   <- data.table(read.csv(file='~/Dropbox/ilab2/Project_Searching/surveyWebsite/iturnsTop100.csv'))
+outMoviesiTunes2   <- data.table(read.csv(file='~/Dropbox/ilab2/Project_Searching/surveyWebsite/iturnsTop100Sep2017.csv'))
+outMoviesiTunes3   <- data.table(read.csv(file='~/Dropbox/ilab2/Project_Searching/surveyWebsite/iturnsTop100Jan2018.csv'))
 
 summary(outMovies$Price)
 #outMovies[, Price := as.double(substring(Price, 2))]
